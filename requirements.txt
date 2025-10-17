@@ -1,0 +1,4 @@
+pygame
+kivy
+kivymd
+buildozer==2.5.2
