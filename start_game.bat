@@ -29,11 +29,21 @@ if not exist "%PYTHON_DIR%\python.exe" (
 
 REM Check if pygame is installed (in portable Python)
 echo 🔍 Checking portable dependencies...
-"%PYTHON_DIR%\python.exe" -c "import pygame" >nul 2>&1
+
+REM Try to import pygame and get version info
+"%PYTHON_DIR%\python.exe" -c "import pygame; print('Pygame version:', pygame.version.ver)" >nul 2>&1
 if errorlevel 1 (
-    echo ⚠️  Pygame is not installed in portable Python.
+    echo ❌ Pygame is not properly installed in portable Python.
     echo.
-    echo Please run setup_game.bat again to install pygame.
+    echo This usually means the installation failed or was incomplete.
+    echo.
+    echo Please run setup_game.bat again to reinstall pygame.
+    echo.
+    echo If the problem persists, try:
+    echo 1. Delete the 'python' folder and run setup_game.bat again
+    echo 2. Check your internet connection
+    echo 3. Run as administrator
+    echo 4. Temporarily disable antivirus software
     echo.
     pause
     exit /b 1

@@ -99,28 +99,105 @@ echo ✅ Portable Python installed successfully
 echo.
 echo 📦 Step 3: Installing pygame locally...
 
-REM Install pygame using portable Python
-"%PYTHON_DIR%\python.exe" -m pip install --upgrade pip --quiet
-if errorlevel 1 (
-    echo ⚠️  Failed to upgrade pip, continuing anyway...
+REM First, we need to install pip for the portable Python
+echo Installing pip for portable Python...
+
+REM Download get-pip.py if it doesn't exist
+if not exist "get-pip.py" (
+    echo Downloading get-pip.py...
+    curl -L -o get-pip.py https://bootstrap.pypa.io/get-pip.py 2>nul
+    if errorlevel 1 (
+        wget -O get-pip.py https://bootstrap.pypa.io/get-pip.py 2>nul
+        if errorlevel 1 (
+            echo ❌ Failed to download get-pip.py
+            echo.
+            echo Please check your internet connection and try again.
+            echo.
+            pause
+            exit /b 1
+        )
+    )
 )
 
+REM Install pip using the portable Python
+echo Running: "%PYTHON_DIR%\python.exe" get-pip.py --quiet
+"%PYTHON_DIR%\python.exe" get-pip.py --quiet
+if errorlevel 1 (
+    echo ❌ Failed to install pip.
+    echo.
+    echo Trying without --quiet flag to see the error...
+    "%PYTHON_DIR%\python.exe" get-pip.py
+    if errorlevel 1 (
+        echo ❌ Pip installation failed.
+        echo.
+        echo This is required for installing pygame.
+        echo Please check your internet connection and try again.
+        echo.
+        echo If the problem persists, you may need to:
+        echo 1. Check if you have enough disk space
+        echo 2. Try running as administrator
+        echo 3. Temporarily disable antivirus software
+        echo.
+        pause
+        exit /b 1
+    )
+)
+
+REM Clean up get-pip.py
+del get-pip.py 2>nul
+
+echo ✅ Pip installed successfully
+
+REM Now install pygame using the portable Python
+echo Installing pygame...
+
+"%PYTHON_DIR%\python.exe" -m pip install --upgrade pip --quiet
+if errorlevel 1 (
+    echo ⚠️  Failed to upgrade pip, continuing with current version...
+)
+
+REM Try installing pygame with better error handling
 "%PYTHON_DIR%\python.exe" -m pip install pygame --quiet
 if errorlevel 1 (
     echo ❌ Failed to install pygame.
     echo.
-    echo This might be due to network issues or missing dependencies.
-    echo The game will not work without pygame.
+    echo Trying alternative installation method...
     echo.
-    echo Troubleshooting:
-    echo 1. Check your internet connection
-    echo 2. Try running as administrator
-    echo 3. Temporarily disable antivirus
-    echo.
-    pause
-    exit /b 1
+
+    REM Try installing without quiet flag to see the actual error
+    echo Attempting pygame installation (showing output for debugging)...
+    "%PYTHON_DIR%\python.exe" -m pip install pygame
+
+    if errorlevel 1 (
+        echo ❌ Pygame installation failed.
+        echo.
+        echo Common solutions:
+        echo 1. Check your internet connection
+        echo 2. Try running as administrator
+        echo 3. Temporarily disable antivirus software
+        echo 4. Make sure you have enough disk space
+        echo.
+        echo The game requires pygame to run. Without it, the game will not work.
+        echo.
+        echo If the problem persists, you can try:
+        echo - Installing Python manually and running: pip install pygame
+        echo - Or contact support with the error messages shown above
+        echo.
+        pause
+        exit /b 1
+    )
 ) else (
     echo ✅ Pygame installed successfully
+)
+
+REM Verify pygame installation
+echo 🔍 Verifying pygame installation...
+"%PYTHON_DIR%\python.exe" -c "import pygame; print('Pygame version:', pygame.version.ver)" >nul 2>&1
+if errorlevel 1 (
+    echo ⚠️  Warning: Pygame import test failed, but installation reported success.
+    echo The game may not work properly. Continuing anyway...
+) else (
+    echo ✅ Pygame verification successful
 )
 
 echo.

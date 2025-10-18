@@ -84,6 +84,50 @@ start_game.bat
 python game.py
 ```
 
+## 🛠️ Troubleshooting
+
+### Installation Issues
+
+**"Failed to upgrade pip" or "Failed to install pygame"**
+
+This usually happens due to:
+1. **Network issues**: Check your internet connection
+2. **Antivirus blocking**: Temporarily disable antivirus software
+3. **Insufficient permissions**: Run as administrator
+4. **Disk space**: Ensure you have enough free space
+
+**Solutions:**
+```batch
+# Run as administrator
+setup_game.bat
+
+# Or try deleting the python folder and reinstalling
+rmdir /s python
+setup_game.bat
+```
+
+### Game Won't Start
+
+**"Pygame is not properly installed"**
+
+This means the pygame installation was incomplete. Try:
+```batch
+# Reinstall pygame
+setup_game.bat
+
+# Or verify installation using the verification script
+verify_install.bat
+
+# Or test manually
+python\python.exe -c "import pygame; print('Pygame works!')"
+```
+
+### Performance Issues
+
+- Close other applications to free up memory
+- Update your graphics drivers
+- Ensure your system meets minimum requirements
+
 ## 🗑️ Uninstallation
 
 **For portable installation:**
