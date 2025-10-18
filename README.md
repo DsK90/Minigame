@@ -24,33 +24,78 @@ A dungeon-crawling action game built with Python and Pygame featuring an anime c
 
 ## 🚀 Quick Start
 
-**Double-click this file to start the game:**
+**🎯 For the easiest experience, run the portable installer:**
 
+```batch
+setup_game.bat
 ```
-start_game.bat
-```
 
-## 📦 Installation
+This will:
 
-1. Make sure you have Python 3.7+ installed
-2. Install the required dependencies:
+- ✅ Download portable Python (if needed)
+- ✅ Install pygame locally (in game folder)
+- ✅ Create desktop and Start Menu shortcuts
+- ✅ Create an uninstaller
+
+**🎮 After installation, just double-click the desktop shortcut to play!**
+
+## ✨ Key Features
+
+- **🔥 Portable Installation**: Everything contained in game folder (~50MB total)
+- **🚀 No System Dependencies**: Works without Python installed on Windows
+- **📦 Single Dependency**: Only pygame required (installed locally)
+- **🛡️ Self-Contained**: Copy folder to any Windows PC and it works
+- **🗑️ Easy Uninstall**: Remove folder or run uninstall.bat
+
+## 📦 Manual Installation (Advanced)
+
+1. **Install Python 3.7+** from https://python.org/downloads/
+
+   - Make sure to check "Add Python to PATH" during installation
+
+2. **Install dependencies:**
+
    ```bash
    pip install -r requirements.txt
    ```
 
+3. **Run the game:**
+   ```bash
+   python game.py
+   ```
+
 ## 🎯 How to Run
 
-**Option 1: Double-click the batch file**
+**Option 1: Portable installer (recommended)**
 
+```batch
+setup_game.bat
 ```
+
+**Option 2: Direct launch (after portable install)**
+
+```batch
 start_game.bat
 ```
 
-**Option 2: Command line**
+**Option 3: Command line**
 
 ```bash
 python game.py
 ```
+
+## 🗑️ Uninstallation
+
+**For portable installation:**
+
+```batch
+uninstall.bat
+```
+
+**For manual installation:**
+
+- Remove the game folder entirely
+- Or uninstall pygame: `pip uninstall pygame`
 
 ## 🎯 Gameplay
 
