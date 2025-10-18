@@ -1,7 +1,14 @@
 import pygame
 import sys
+import os
 import random
 import math
+
+# Add current directory to Python path so we can import local modules
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
 from player import Player
 from monster import Monster
 from clay_pot import ClayPot

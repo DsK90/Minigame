@@ -30,8 +30,8 @@ if not exist "%PYTHON_DIR%\python.exe" (
 REM Check if pygame is installed (in portable Python)
 echo 🔍 Checking portable dependencies...
 
-REM Try to import pygame and get version info
-"%PYTHON_DIR%\python.exe" -c "import pygame; print('Pygame version:', pygame.version.ver)" >nul 2>&1
+REM Check if pygame is working
+call "%PYTHON_DIR%\python.exe" -c "import pygame" >nul 2>&1
 if errorlevel 1 (
     echo ❌ Pygame is not properly installed in portable Python.
     echo.
